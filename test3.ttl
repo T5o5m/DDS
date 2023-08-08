@@ -1,0 +1,45 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex: <http://example.org#> .
+
+# Definition der Klassen
+ex:Maßtoleranz rdf:type rdfs:Class .
+ex:Aspektverhältnis rdf:type rdfs:Class .
+ex:Fertigungsmaschinen rdf:type rdfs:Class .
+ex:EigenschaftsWert rdf:type rdfs:Class .
+
+# Definition der Eigenschaften
+ex:hatMaßtoleranzWert rdf:type rdf:Property ;
+                       rdfs:domain ex:Fertigungsmaschinen ;
+                       rdfs:range ex:EigenschaftsWert .
+
+ex:hatAspektverhältnisWert rdf:type rdf:Property ;
+                           rdfs:domain ex:Fertigungsmaschinen ;
+                           rdfs:range ex:EigenschaftsWert .
+
+ex:hatWert rdf:type rdf:DatatypeProperty ;
+           rdfs:domain ex:EigenschaftsWert ;
+           rdfs:range xsd:int .
+
+# Definition der Wert-Individuen
+ex:3AchsFräsenToleranz rdf:type ex:EigenschaftsWert ;
+                       ex:hatWert 2 .
+
+ex:5AchsFräsenToleranz rdf:type ex:EigenschaftsWert ;
+                       ex:hatWert 3 .
+
+# ... Analog für andere Maschinen ...
+
+# Definition der Fertigungsmaschinen-Individuen und ihre spezifischen Werte
+ex:3AchsFräsen rdf:type ex:Fertigungsmaschinen ;
+               ex:hatMaßtoleranzWert ex:3AchsFräsenToleranz ;
+               # für Aspektverhältnis
+               ex:hatAspektverhältnisWert ex:3AchsFräsenAspekt .
+
+ex:5AchsFräsen rdf:type ex:Fertigungsmaschinen ;
+               ex:hatMaßtoleranzWert ex:5AchsFräsenToleranz ;
+               # für Aspektverhältnis
+               ex:hatAspektverhältnisWert ex:5AchsFräsenAspekt .
+
+# ... Analog für andere Maschinen ...
